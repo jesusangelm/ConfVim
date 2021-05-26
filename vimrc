@@ -13,9 +13,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 """""""""" Plugins """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""""""""""""""""""""""""" Golang
-Plugin 'fatih/vim-go'
-
 """"""""""""""""""""""""""""""""" Elixir
 Plugin 'elixir-lang/vim-elixir'
 
@@ -63,6 +60,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Yggdroot/indentLine'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'w0rp/ale'
 
 """""""""""""""""""""""""" Esquema de colores
 Plugin 'nanotech/jellybeans.vim'
@@ -186,7 +184,8 @@ noremap <leader>x :bn<CR>
 noremap <leader>w :bn<CR>
 
 ""cerrar un buffer
-noremap <leader>c :bd<CR>
+"noremap <leader>c :bd<CR>
+noremap <leader>c :bp<bar>sp<bar>bn<bar>bd<CR>
 
 ""limpia las busquedas resaltadas
 nnoremap <silent> <leader><space> :noh<cr>
@@ -308,7 +307,7 @@ let g:syntastic_ruby_checkers = ['rubocop']
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""" Ctrlp.vim """"""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_cmd = 'CtrlPBuffer'
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox)$'
 let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
 let g:ctrlp_use_caching = 0
@@ -329,6 +328,7 @@ noremap <Leader>gr :Gremove<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""" NERDtree """""""""""""""""""""""""""""""""""""""""""
+"autocmd vimenter * NERDTree
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
@@ -386,9 +386,16 @@ let g:indentLine_faster = 1
 " cambia la ejecucion del snippet de TAB a ss para no tener conflicto con YCM
 "imap ss <esc>a<Plug>snipMateNextOrTrigger
 "smap ss <Plug>snipMateNextOrTrigger
+let g:snipMate = { 'snippet_version' : 1 }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""" NeoComplete  """""""""""""""""""""""""""""""""""""""
 let g:neocomplete#enable_at_startup = 1
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""" A.L.E  """""""""""""""""""""""""""""""""""""""
+let g:ale_completion_enabled = 1
+"let g:ale_elixir_elixir_ls_release = '/home/angel/LSP/elixir-ls/rel'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
