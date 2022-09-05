@@ -1,198 +1,255 @@
-"Usamos Vim, no VI
-set nocompatible
-filetype off "requerido por Vundle!!!
+"""" Esto es Vim, no vi
+if &compatible
+  set nocompatible " Desactivamos compatibilidad con vi
+endif
+
+"""" Usamos vim-plug para administrar los plugins
+"""" asi que aca lo instalamos en caso de que no este instalado.
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
 
-"Vundle!!!
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-"Vundle administra Vundle!!! WTF!
-Plugin 'VundleVim/Vundle.vim'
-
-
-"""""""""" Plugins """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""" Elixir
-Plugin 'elixir-lang/vim-elixir'
-
-"""""""""""""""""""""""""" HTML/CSS/Templates
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-markdown'
-Plugin 'KohPoll/vim-less'
-Plugin 'slim-template/vim-slim'
-Plugin 'mustache/vim-mustache-handlebars'
-
-"""""""""""""""""""""""""" JS
-"Plugin 'jelera/vim-javascript-syntax'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'othree/yajs.vim'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'mxw/vim-jsx'
-
-"""""""""""""""""""""""""" Ruby/Rails
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-rake'
-Plugin 'vim-ruby/vim-ruby'
-
-"""""""""""""""""""""""""" Snippets
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'
-
-"""""""""""""""""""""""""" Herramientas
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'scrooloose/syntastic'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-endwise'
-Plugin 'Raimondi/delimitMate'
-Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/nerdtree'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-surround'
-Plugin 'majutsushi/tagbar'
-Plugin 'ap/vim-css-color'
-Plugin 'mileszs/ack.vim'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Yggdroot/indentLine'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'w0rp/ale'
-
-"""""""""""""""""""""""""" Esquema de colores
-Plugin 'nanotech/jellybeans.vim'
-Plugin 'tomasr/molokai'
-Plugin 'chriskempson/vim-tomorrow-theme'
-Plugin 'w0ng/vim-hybrid'
-
-call vundle#end()
-"""""""""""" Fin de config de Vundle y requerimientos de plugins """"""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Inicio de config de vim-plug y requerimientos de plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""" Cargamos los plugins desde el directorio que los contiene
+call plug#begin('~/.vim/plugged')
 
-filetype plugin indent on "requerido por Vundle!!!
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins a instalar
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""" Esquema de colores
+Plug 'nanotech/jellybeans.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'sainnhe/sonokai'
 
+"""" Snippets
+Plug 'SirVer/ultisnips' "Engine
+Plug 'honza/vim-snippets' "Snippets repo
 
-"soporte de 256 colores en vim
-set t_Co=256
+"""" Herramientas
+"NERDTree navegador de carpetas y archivos
+Plug 'preservim/nerdtree'
 
-"Color del fondo oscuro
-"set background=dark
+" vim-airline barra de estado e informacion
+Plug 'vim-airline/vim-airline'
 
+" vim-fugitive soporte Git en Vim y complemento para vim-airline
+Plug 'tpope/vim-fugitive'
+
+" neomake Verificador de sintaxis para multiples lenguajes
+Plug 'neomake/neomake'
+
+" neoformat formateador de codigo para multiples lenguajes
+Plug 'sbdchd/neoformat'
+
+" coc.nvim Autocompletado de codigo tipo VSCode
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" vim-commentary comentar/descomentar codigo
+Plug 'tpope/vim-commentary'
+
+" vim-surround rodear texto con ", ', (), [], {}, etc
+Plug 'tpope/vim-surround'
+
+" Ruby/Rails
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+
+" Elixir
+Plug 'elixir-lang/vim-elixir'
+
+call plug#end()
+" This call automatically executes:
+"    filetype plugin indent on and syntax enable.
+" You can revert the settings after the call.
+"    filetype indent off, syntax off, etc.
+
+"Desactivacion de deteccion de tipo de archivo
+"Ayuda a forzar que los plug-ins se carguen correctamente
+"una vez se active de nuevo mas abajo
+filetype off
 
 "activacion resaltado de sintaxys
 syntax on
 
-"""""""""""""""""""""""""""""""""""" Visual """""""""""""""""""""""""""""""""""
+" Activa
+" - la deteccion de tipo de archivo,
+" - la carga de archivos de plugins de acuerdo al tipo de archivo detectado
+" - la carga de archivos de identado de acuerdo al tipo de archivo detectado
+filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Esquema de colores
+" Fin de config de vim-plug y requerimientos de plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ajustes Visual
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""" Esquema de colores en uso y su configuracion
+
+"Color del fondo oscuro
+set background=dark
+
+" Jellybeans
 "let g:jellybeans_use_term_background_color = 0  "solo para jellybeans
 "let g:jellybeans_use_term_italics = 1
 colorscheme jellybeans
 
+" Gruvbox
+" if has('termguicolors')
+"   set termguicolors
+" endif
+" let g:gruvbox_material_background = 'hard' "Options: 'hard', 'medium'(default), 'soft'
+" let g:gruvbox_material_better_performance = 1
+" let g:gruvbox_material_foreground = 'original' "Options 'material'(default), 'mix', 'original'
+" colorscheme gruvbox-material
+" let g:airline_theme = 'gruvbox_material'
+
+" Sonokai
+" if has('termguicolors')
+"   set termguicolors
+" endif
+" let g:sonokai_style = 'andromeda'  "Options: 'default', 'atlantis', 'andromeda', 'shusia', 'maia', `'espresso'
+" let g:sonokai_better_performance = 1
+" colorscheme sonokai
+" let g:airline_theme = 'sonokai'
+
+
+"marca el ancho maximo que deberia tener una linea
+set colorcolumn=80                                       " Esta linea de aca =>
+
+"soporte de 256 colores en vim
+set t_Co=256
+
 "enumerar las lineas
 set number
 
-"Muestra la linea de status
-"teniendo Vim-Airline muestra la generada po dicho plugin
+"Resalta la linea donde esta el cursorline"
+set cursorline
+
+"Especifica cuando la ultima ventana tendra una linea de status
+"0 = nunca
+"1 = si hay la menos dos ventanas
+"2 = siempre
 set laststatus=2
 
-set showcmd "Muestra comandos incompletos en esquina inferior derecha
+"Muestra comandos incompletos en esquina inferior derecha
+set showcmd
 
-"Esconde el modo actual ya que Vim-Airline tambien lo muestra.
-set noshowmode
+"Marca para visualizar el quiebre de lineas largas
+set showbreak=↪   
 
-"Resalta la linea donde esta el cursorline"
-"set cursorline
-
-set colorcolumn=80 "marca el ancho maximo que deberia tener una linea
-
-set nowrap "NO corta las lineas largas para evitar scroll horizontal
-
-set showbreak=↪ "marca para indicar un quiebre de lineas largas
-
-set list "muestra tabulaciones, fin de linea, espacios, etc.
+"muestra tabulaciones, fin de linea, espacios, etc.
+set list
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮,trail:⋅,nbsp:.
 
-set wildmode=list:longest,list:full "mostrar opciones de completado de comandos
-set wildmenu "lista seleccionable de autocompletado de comandos.
+"mostrar opciones de completado de comandos, al presionar Tab
+"mientras se escribe un comando
+set wildmode=list:longest,list:full
 
-"resaltado de syntaxys sincronizado desde el inicio
+"lista seleccionable de autocompletado de comandos, al presionar Tab
+"mientras se escribe un comando
+set wildmenu
+
+"resaltado de syntaxys sincronizado
 augroup vimrc-sync-fromstart
   autocmd!
-  autocmd BufEnter * :syntax sync fromstart
+  autocmd BufEnter * :syntax sync maxlines=200
 augroup END
+
+"Resalta las palabras que concuerdan con una busqueda
+set hlsearch
+
+"NO hacer salto de lineas largas
+"set nowrap "ACTIVADO. las lineas seran mas altas si excede ancho de ventana
+
+"Esconde la visualizacion del modo en el que se esta
+"set noshowmode
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-
-"""""""""""""""""""""""""""""""" backups """"""""""""""""""""""""""""""""""""""
+" Ajustes Basicos
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set noswapfile "desactiva los archivos Swap
-set nobackup   "no se crean respaldos permanentes cuando se guarda un archivo
-set nowritebackup "no se crean respaldos temporales al guardar archivos
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""" Codificacion
+
+"Ajuste de codificacion de caracteres en Vim a UTF-8
+set encoding=utf-8
+
+"Ajuste de codificacion de caracteres para el archivo en el buffer
+set fileencoding=utf-8
+
+"Lista de tipos de codificacion de caracteres que vim puede usar
+set fileencodings=utf-8
 
 
+"""" Identacion
+" Podria sobre-escribirse o cambiar mas abajo dependiendo del archivo
 
+"Numero de espacios que cuenta un <Tab> en el archivo.
+set tabstop=4
+"
+"Numero de espacios que equivaldrian a un <Tab>
+set softtabstop=0
 
-"""""""""""""""""""""""""""""" Identacion """""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"sangrado con espacios y no con tabulacion.
+"sangrado automatico al saltar la linea de 4 espacios
+set shiftwidth=4
+
+"sangrado con espacios y no con tabulacion <Tab>.
 set expandtab
 
-"la tecla TAB inserta 2 espacios de sangrado
-set softtabstop=2
 
-"sangrado automatico al saltar la linea de 2 espacios
-set shiftwidth=2
+"""" Busqueda
+
+"Muestra la concordancia de una busqueda mientras escribes.
+set incsearch
+
+"Busquedas no distinguen mayusculas y minusculas
+set ignorecase
+
+"""" Buffers
+
+"Permite buffers escondidos
+"tambien permite los undo/redo luego de cambiar de buffer
+set hidden
+
+"""" Utiles
+"Indica una terminal de conexion rapida,
+"mejora la suavides del re-dibujado cuando hay multiples ventanas
+"y la terminal no soporta regiones con scroll.
+"basicamente mejora el scrolling
+set ttyfast
+
+"Vim recuerda la posicion del cursor al reabrir un archivo.
+augroup vimrc-remember-cursor-position
+  autocmd!
+  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+augroup END
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
-
-"""""""""""""""""""""""""" Comportamientos y mapeos """""""""""""""""""""""""""
+" Comportamiento y mapeos
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Mapea <leader> a la tecla ,  (coma)
+"permitir la tecla retroceso en modo insertar para eliminar.
+set backspace=indent,eol,start
+
+"Mapea <leader> a la tecla \  (backslash)
 let mapleader = "\\"
 
-"Cortar, Copiar y Pegar con las teclas ,d ,y y ,p
+"Copiar, Cortar y Pegar con las teclas \y \d y \pP
+"Copiado en modo Visual con \y
 vmap <Leader>y "+y
+"Cortar en modo Visual con \d
 vmap <Leader>d "+d
+"Pegado en modo Normal con \p o \P
 nmap <Leader>p "+p
 nmap <Leader>P "+P
+"Pegado en modo Visual con \p o \P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-
-"arregla identacion presionando la tecla F7
-map <F7> mzgg=G`z<CR>
-
-"presiona espacio para borrar la busqueda resaltada
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-
-" divide el buffer en forma horizontal y vertical respectivamente
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
-
-"navegacion entre los buffers
-noremap <leader>z :bp<CR>
-noremap <leader>q :bp<CR>
-noremap <leader>x :bn<CR>
-noremap <leader>w :bn<CR>
-
-""cerrar un buffer
-"noremap <leader>c :bd<CR>
-noremap <leader>c :bp<bar>sp<bar>bn<bar>bd<CR>
-
-""limpia las busquedas resaltadas
-nnoremap <silent> <leader><space> :noh<cr>
-
-"" Vmap para mantener el Visual Mode despues de presionar shift > y <
-vmap < <gv
-vmap > >gv
 
 """" Atajos utiles, cuando te equivocas escribiendo alguno de estos comandos
 "ejemplo :w para guardar, si escribes rapido posiblemente escribas :W
@@ -207,195 +264,148 @@ cnoreabbrev WQ wq
 cnoreabbrev Q q
 cnoreabbrev Qall qall
 
-"permitir la tecla retroceso en modo insertar para eliminar.
-set backspace=indent,eol,start
+"Vmap para mantener el Visual Mode despues de presionar shift > y <
+vmap < <gv
+vmap > >gv
+"Util cuando se mueve bloques de texto seleccionado con shift > o <
+"en modo visual y no quieres que se salga del modo automaticamente
 
-"Recarga automaticamente el buffer cuando un archivo ha tenido algun cambio
-set autoread
+" Limpia las busquedas resaltadas con \space
+nnoremap <silent> <leader><space> :noh<cr>
 
-"Esconde buffers cuando no se muestra
-"tambien permite los undo/redo luego de cambiar de buffer
-set hidden
+"Moverse entre Buffers
+"buffer anterior \z o \q
+noremap <leader>z :bp<CR>
+noremap <leader>q :bp<CR>
+"buffer siguiente \x o \w
+noremap <leader>x :bn<CR>
+noremap <leader>w :bn<CR>
 
-"muchos historial de deshacer
-set undolevels=1000
+"Elimina el buffer actual, sin eliminar la ventana
+noremap <leader>c :bp<bar>sp<bar>bn<bar>bd<CR>
 
-" Vim recuerda la posicion del cursor al reabrir un archivo.
-augroup vimrc-remember-cursor-position
-  autocmd!
-  autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ajustes por lenguaje
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""" Golang
+"identacion
+augroup vimrc-golang
+  autocmd!
+  autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+augroup END
+
+"""" HTML
+"identacion
+augroup vimrc-html
+  autocmd!
+  autocmd Filetype html setlocal ts=2 sw=2 expandtab
+augroup END
+
+"""" Javascript
+"identacion
+augroup vimrc-javascript
+  autocmd!
+  autocmd FileType javascript setl tabstop=4|setl shiftwidth=4|setl expandtab softtabstop=4
+augroup END
+
+"""" Ruby
+"Identacion
+augroup vimrc-ruby
+  autocmd!
+  autocmd BufNewFile,BufRead *.rb,*.rbw,*.gemspec setlocal filetype=ruby
+  autocmd FileType ruby set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+augroup END
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ajustes por Plugins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""" NERDTree
+" Abre/Cierra NERDTree con F3
+nnoremap <silent> <F3> :NERDTreeToggle<CR>
+
+"Inicia  NERDTree cuando Vim es iniciado sin especificar un archivo"
+augroup vimrc-nerdtree-autostart
+  autocmd!
+  autocmd StdinReadPre * let s:std_in=1
+  autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+augroup END
+
+" Tamano de ventana de NERDTreee
+let g:NERDTreeWinSize = 40
 
 
-"#############################################################################"
-"""""""""""""""""""""" Config varias """"""""""""""""""""""""""""""""""""""""""
-"" busquedas
-set ignorecase "busquedas no distinguen mayusculas y minusculas
-set incsearch   "Muestra la concordancia de una busqueda mientras escribes.
-set hlsearch    "Resalta las busquedas
+"""" Neomake
+"Verifica sintaxis cuando se guarda el archivo (no delay)
+call neomake#configure#automake('w')
 
-""""""""""""""""Configs especiales para para Gvim """""""""""""""""""""""""""""
-if has('gui_running')
-  set lines=40  "Abre Gvim con 40 lineas de alto
-  set guioptions-=T "Elimina la barra de herramientas en Gvim
+"Abre automaticamente ventana con listado de errores/warnings
+let g:neomake_open_list = 2
 
-  "Letra parchada para compatibilidad con Vim-Airline
-  set guifont=Inconsolata\ Medium\ 12
+
+""" Neoformat
+"Ejecuta Neoformat con \fm
+nnoremap <leader>fm :Neoformat<CR>
+
+
+"""" Coc.nvim
+"Extenciones a instalar en caso de que no esten instaladas
+let g:coc_global_extensions = ['coc-solargraph', 'coc-css', 'coc-elixir', 'coc-html', 'coc-json', 'coc-tsserver']
+
+"Tecla Enter confirma la sugerencia seleccionada
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+"Corrige los colores de sugerencia resaltada.
+"NO NECESARIO para todos los esquemas de colores
+hi CocMenuSel ctermbg=237 guibg=#13354A
+
+"Ruta de NodeJS. Tecnicamente no es necesario, pero podria ser util
+"let g:coc_node_path = '/home/angel/.asdf/shims/node'
+
+
+"""" vim-ruby
+"Resalta operadores
+let ruby_operators        = 1
+
+"Resalta pseudo operadores ., &., ::, *, **, &, <, << and ->.
+let ruby_pseudo_operators = 1
+
+
+"""" vim-airline
+"Muestra los buffers en la parte superior, si solo hay un tab abierto
+let g:airline#extensions#tabline#enabled = 1
+
+"Utiliza simbolos airline si se esta usando una fuente powerline
+let g:airline_powerline_fonts = 1
+
+"Muestra rama Git, Requiere vim-fugitive
+let g:airline#extensions#branch#enabled = 1
+
+"Define lista vacia de simbolos airline si no existe
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
 endif
 
+"Define simbolos unicode
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.crypt = '🔒'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.maxlinenr = '㏑'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
 
-"""""""""""""""""""""""""""" Codificacion """""""""""""""""""""""""""""""""""""
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"##############################################################################"
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""""" Config para plugins """"""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Vim-go """""""""""""""""""""""""""""""""""""""""""""
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:go_fmt_fail_silently = 1
-autocmd FileType go setlocal noet ts=8 sw=8 sts=8 ""indentado especial para Go
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""Vim-airline """"""""""""""""""""""""""""""""""""""""
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
-"integracion con syntastic
-let g:airline#extensions#syntastic#enabled = 1
-"integracion con fugitive
-let g:airline#extensions#branch#enabled = 1
-"Theme para airline
-let g:airline_theme="powerlineish"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Vim-ruby """""""""""""""""""""""""""""""""""""""""""
-let g:rubycomplete_buffer_loading = 1
-let g:rubycomplete_classes_in_global = 1
-let g:rubycomplete_rails = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Syntastic """"""""""""""""""""""""""""""""""""""""""
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=2
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_check_on_wq = 0
-
-"let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_javascript_checkers = ['standard']
-let g:syntastic_ruby_checkers = ['rubocop']
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Ctrlp.vim """"""""""""""""""""""""""""""""""""""""""
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|tox)$'
-let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-let g:ctrlp_use_caching = 0
-let g:ctrlp_open_new_file = 'r'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Vim-fugitive """""""""""""""""""""""""""""""""""""""
-noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gsh :Gpush<CR>
-noremap <Leader>gll :Gpull<CR>
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
-noremap <Leader>gr :Gremove<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" NERDtree """""""""""""""""""""""""""""""""""""""""""
-"autocmd vimenter * NERDTree
-let g:NERDTreeChDirMode=2
-let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-let g:NERDTreeWinSize = 40
-"resalta el archivo actual en el arbol
-nnoremap <silent> <F2> :NERDTreeFind<CR>
-"muestra/esconde NERDTree.
-noremap <F3> :NERDTreeToggle<CR>
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Tabular """"""""""""""""""""""""""""""""""""""""""""
-nmap <Leader>a :Tabularize /
-vmap <Leader>a :Tabularize /
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Tagbar """""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> <F4> :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-let g:tagbar_type_ruby = {
-    \ 'kinds' : [
-        \ 'm:modules',
-        \ 'c:classes',
-        \ 'd:describes',
-        \ 'C:contexts',
-        \ 'f:methods',
-        \ 'F:singleton methods'
-    \ ]
-\ }
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [  'p:package', 'i:imports:1', 'c:constants', 'v:variables',
-        \ 't:types',  'n:interfaces', 'w:fields', 'e:embedded', 'm:methods',
-        \ 'r:constructor', 'f:functions' ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : { 't' : 'ctype', 'n' : 'ntype' },
-    \ 'scope2kind' : { 'ctype' : 't', 'ntype' : 'n' },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""""""""""""""""""""""""""""" IdentLine """""""""""""""""""""""""""""""""""""""
-let g:indentLine_enabled = 1
-let g:indentLine_concealcursor = 0
-let g:indentLine_char = '┆'
-let g:indentLine_faster = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" Vim-snipmate  """""""""""""""""""""""""""""""""""""
-" cambia la ejecucion del snippet de TAB a ss para no tener conflicto con YCM
-"imap ss <esc>a<Plug>snipMateNextOrTrigger
-"smap ss <Plug>snipMateNextOrTrigger
-let g:snipMate = { 'snippet_version' : 1 }
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" NeoComplete  """""""""""""""""""""""""""""""""""""""
-let g:neocomplete#enable_at_startup = 1
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"""""""""""""""""""""""""" A.L.E  """""""""""""""""""""""""""""""""""""""
-let g:ale_completion_enabled = 1
-"let g:ale_elixir_elixir_ls_release = '/home/angel/LSP/elixir-ls/rel'
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Define simbolos powerline si soporte de fuente powerline desactivada
+if get(g:, 'airline_powerline_fonts', 0)
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+  let g:airline_symbols.maxlinenr= ''
+endif

@@ -1,4 +1,4 @@
-# Mi Configuracion Vim + Vundle
+# Mi Configuracion Vim + vim-plug
 
 ## Instalacion: simplemente clona el repositorio
 
@@ -6,22 +6,16 @@
 $ git clone https://github.com/jesusangelm/ConfVim.git ~/.vim
 ```
 
-**Crea los enlaces simbolicos (symlinks) al .vimrc :**
+**Instalacion inicial**
 
+Simplemente abre Vim y espera a que se descargue vim-plug
 ```bash
-$ ln -s ~/.vim/vimrc ~/.vimrc
-$ ln -s ~/.vim/vimrc ~/.gvimrc
-```
-
-**Instala Vundle**
-
-```bash
-$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+$ vim
 ```
 
 **Instala los plugins:**
 
-Abra `vim` y ejecute `:PluginInstall`  (o `vim +PluginInstall +qall` para los amantes de la terminal)
+Abra `vim` y ejecute `:PlugInstall`
 
 **Fuentes parchadas para Powerline**
 
@@ -31,66 +25,138 @@ git clone https://github.com/Lokaltog/powerline-fonts.git
 ```
 e instale sus fuentes favoritas
 
-# Plugins incluidos:
+# Plugins:
 
-  * 'fatih/vim-go'
-  * 'tpope/vim-haml'
-  * 'tpope/vim-markdown'
-  * 'KohPoll/vim-less'
-  * 'slim-template/vim-slim'
-  * 'mustache/vim-mustache-handlebars'
-  * 'jelera/vim-javascript-syntax'
-  * 'kchmck/vim-coffee-script'
-  * 'tpope/vim-rails'
-  * 'tpope/vim-rake'
-  * 'vim-ruby/vim-ruby'
-  * 'MarcWeber/vim-addon-mw-utils'
-  * 'tomtom/tlib_vim'
-  * 'garbas/vim-snipmate'
+## Plugin Manager
+  * 'junegunn/vim-plug'
+
+## Esquema de colores
+  * 'nanotech/jellybeans.vim' (En uso)
+  * 'sainnhe/gruvbox-material'
+  * 'sainnhe/sonokai'
+
+##  Snippets
+  * 'SirVer/ultisnips'
   * 'honza/vim-snippets'
-  * 'bling/vim-airline'
-  * 'airblade/vim-gitgutter'
-  * 'scrooloose/syntastic'
-  * 'ctrlpvim/ctrlp.vim'
-  * 'scrooloose/nerdcommenter'
-  * 'tpope/vim-endwise'
-  * 'Raimondi/delimitMate'
+
+## Herramientas
+
+  * 'preservim/nerdtree'
+  * 'vim-airline/vim-airline'
   * 'tpope/vim-fugitive'
-  * 'scrooloose/nerdtree'
-  * 'godlygeek/tabular'
+  * 'neomake/neomake'
+  * 'sbdchd/neoformat'
+  * 'neoclide/coc.nvim'
+  * 'tpope/vim-commentary'
   * 'tpope/vim-surround'
-  * 'majutsushi/tagbar'
-  * 'ap/vim-css-color'
-  * 'Valloric/YouCompleteMe'
 
-# Colorscheme: instalados como plugins.
+## Ruby/Rails
+  * 'vim-ruby/vim-ruby'
+  * 'tpope/vim-rails'
 
-  * 'nanotech/jellybeans.vim'
-  * 'tomasr/molokai'
-  * 'altercation/vim-colors-solarized'
-  * 'chriskempson/vim-tomorrow-theme'
-  * 'w0ng/vim-hybrid' 
+##  Elixir
+  * 'elixir-lang/vim-elixir'
 
 
-# Mapeos de teclas:
+# Mapeos de teclas personalizados:
+Mapeos creados especificamente para esta configuracion
 
- * `<leader>` esta mapeado a la tecla "," (coma).
- * Presiona `F2` resalta el archivo actual en el arbol de NERDTree.
+## Tecla Leader
+ * `<leader>` esta mapeado a la tecla "\\" (barra inclinada).
+ * `\espacio` limpia el texto resaltado producto de una busqueda
+
+
+## Copiar/Cortar/Pegar
+Copiar, Cortar y Pegar con las teclas \y \d y \pP
+
+  * `\y` para copiar en modo Visual
+  * `\d` para Cortar en modo Visual
+  * `\p` o `\P` para Pegar en modo Normal
+  * `\p` o `\P` para pegar en modo Visual
+
+
+## Buffers
+  * `\q` o `\z` muestra el buffer anterior
+  * `\w` o `\x` muestra el buffer siguiente
+  * `\c` elimina el buffer actual, sin elminar  la ventana
+
+
+## Plugins
+
+### NERDTree
  * Presiona `F3` para mostrar/esconder NERDTree.
- * Presiona `F7` para identar automaticamente todo el contenido del buffer.
- * Presiona `<space>` (Barra Espaciadora) para eliminar busquedas resaltada.
- * Pesiona `<leader>h` para dividir el buffer horizontalmente
- * Pesiona `<leader>v` para dividir el buffer verticalmente
- * Pesiona `<leader>c` para cerrar un buffer
- * Presiona `<leader>z` o `<leader>x` para navegar entre los buffers
- * `<leader> cc` Para comentar la linea actual o una seleccion de lineas.
- * `<leader> cu` Para descomentar la linea actual o una seleccion de lineas
 
-**Mapeos para Fugitive**
+### neoformat
+  * Presiona `\fm` para ejecutar neoformat
 
-* Presiona `<leader>gs` para un `git status`
-* Presiona `<leader>gd` para un `git diff`
-* Presiona `<leader>gc` para un `git commmit`
-* Presiona `<leader>gb` para un `git blame`
-* Presiona `<leader>gsh` para un `git push`
-* Presiona `<leader>gll` para un `git pull`
+
+# Uso de plugins:
+Instrucciones basicas de como usar algunos plugins agregados
+
+## vim-plug
+  * `:PluginInstall` para instalar los plugins no instalados
+  * `:PluginClean` para eliminar los plugins no listados en el .vimrc
+
+## neomake
+Neomake ejecutara el verificador de sintaxis autoamticamente al guardar el buffer
+
+Para que neomake funcione correctamente, es necesario que este instalado al menos
+un verificador de sintaxis o linter para el tipo de archivo en edicion.
+Algunos ejemplos (verificar documentacion de neomake para mas detalles):
+
+Ruby:
+  * rubocop
+  * rubylint
+
+javascript:
+  * eslint
+  * jshint
+
+Elixir:
+  * credo
+  * elixirc
+
+
+## neoformat
+Neoformat se encarga de formatear correctamente el codigo y se ejecuta con `\fm`
+
+Al igual que Neomaker, Neoformat requiere de verificadores de sintaxis o linters
+para funcionar correctamente. Generalmente los mismos que funcionan para Neomaker
+funcionaran para Neoformat, pero de igual modo, aca hay algunos ejemplos:
+
+Ruby:
+  * rubocop
+  * rufo
+  * ruby-beautify
+
+javascript:
+  * js-beautify
+  * prettier
+
+Elixir:
+  * mix format
+
+## vim-commentary
+Para comentar/descomentar codigo
+
+En modo normal y sobre una linea de codigo, presiona `gcc` y se comentara esa linea.
+Este comando funciona como un toggler, por lo que pulsandolo nuevamente en una linea
+ya comentada, procedera a descomentarla.
+
+En modo visual y con un bloque de texto seleccionado, pulsa `gc` y comentara ese
+bloque de texto. de la misma forma, se puede descomentar ese mismo bloque.
+
+En modo normal pulsa `gcgc` para descomentar lineas cercanas que ya esten comentadas,
+sin tener que seleccionarlas o tener el cursor en dicha linea.
+
+## vim-surround
+Para agregar/eliminar "", '', (), [], {} y mas, al rededor de texto
+
+### cambiar
+Presiona `cs"'` dentro del texto `"prueba"` para cambiarlo a `'prueba'`.
+
+Puedes hacer lo mismo pero ahora con etiquetas HTML, por ejemplos:
+Presiona `cs'<p>` dentro del texto `'prueba'` para cambiarlo a `<p>prueba</p>`
+
+### eliminar
+Presiona `ds'` para eliminar las comillas simples del texto `'prueba'`
