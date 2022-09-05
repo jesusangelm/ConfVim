@@ -49,6 +49,7 @@ e instale sus fuentes favoritas
   * 'neoclide/coc.nvim'
   * 'tpope/vim-commentary'
   * 'tpope/vim-surround'
+  * 'Yggdroot/indentLine'
 
 ## Ruby/Rails
   * 'vim-ruby/vim-ruby'

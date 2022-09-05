@@ -55,12 +55,24 @@ Plug 'tpope/vim-commentary'
 " vim-surround rodear texto con ", ', (), [], {}, etc
 Plug 'tpope/vim-surround'
 
+" identLine muestra lineas verticales para cada nivel de identacion
+Plug 'Yggdroot/indentLine'
+
 " Ruby/Rails
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
 
 " Elixir
 Plug 'elixir-lang/vim-elixir'
+
+"""Tentativos""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Los siguientes son plugins que me gustaria colocar, pero que todavia
+" estoy evaluando si realmente los necesito o evaluando su configuracion
+"
+"Plug 'godlygeek/tabular' " Ordena/alinea texto
+"Plug 'itchyny/lightline.vim' " Reemplazo de vim-airline
+"Plug 'Raimondi/delimitMate' "Cierra automaticamente comillas, parentesis, etc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#end()
 " This call automatically executes:
@@ -90,9 +102,13 @@ filetype plugin indent on
 " Ajustes Visual
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """" Esquema de colores en uso y su configuracion
-
-"Color del fondo oscuro
+""Color del fondo oscuro
 set background=dark
+
+"Mejora en los colores, necesario en algunos colorscheme
+if has('termguicolors')
+  set termguicolors
+endif
 
 " Jellybeans
 "let g:jellybeans_use_term_background_color = 0  "solo para jellybeans
@@ -100,9 +116,6 @@ set background=dark
 colorscheme jellybeans
 
 " Gruvbox
-" if has('termguicolors')
-"   set termguicolors
-" endif
 " let g:gruvbox_material_background = 'hard' "Options: 'hard', 'medium'(default), 'soft'
 " let g:gruvbox_material_better_performance = 1
 " let g:gruvbox_material_foreground = 'original' "Options 'material'(default), 'mix', 'original'
@@ -110,9 +123,6 @@ colorscheme jellybeans
 " let g:airline_theme = 'gruvbox_material'
 
 " Sonokai
-" if has('termguicolors')
-"   set termguicolors
-" endif
 " let g:sonokai_style = 'andromeda'  "Options: 'default', 'atlantis', 'andromeda', 'shusia', 'maia', `'espresso'
 " let g:sonokai_better_performance = 1
 " colorscheme sonokai
