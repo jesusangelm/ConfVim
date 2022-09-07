@@ -51,13 +51,17 @@ e instale sus fuentes favoritas
   * 'tpope/vim-surround'
   * 'Yggdroot/indentLine'
 
-## Ruby/Rails
+## Lenguajes/Frameworks
+
+### Ruby/Rails
   * 'vim-ruby/vim-ruby'
   * 'tpope/vim-rails'
 
-##  Elixir
+###  Elixir
   * 'elixir-lang/vim-elixir'
 
+### Javascript
+  * 'jelera/vim-javascript-syntax'
 
 # Mapeos de teclas personalizados:
 Mapeos creados especificamente para esta configuracion

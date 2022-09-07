@@ -26,9 +26,23 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'sainnhe/gruvbox-material'
 Plug 'sainnhe/sonokai'
 
+
 """" Snippets
 Plug 'SirVer/ultisnips' "Engine
 Plug 'honza/vim-snippets' "Snippets repo
+
+
+"""" Lenguajes/Frameworks
+" Ruby/Rails
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+
+" Elixir
+Plug 'elixir-lang/vim-elixir'
+
+" Javascript
+Plug 'jelera/vim-javascript-syntax'
+
 
 """" Herramientas
 "NERDTree navegador de carpetas y archivos
@@ -58,12 +72,9 @@ Plug 'tpope/vim-surround'
 " identLine muestra lineas verticales para cada nivel de identacion
 Plug 'Yggdroot/indentLine'
 
-" Ruby/Rails
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
+" delimitMate Cierra automaticamente comillas, parentesis, etc
+Plug 'Raimondi/delimitMate'
 
-" Elixir
-Plug 'elixir-lang/vim-elixir'
 
 """Tentativos""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Los siguientes son plugins que me gustaria colocar, pero que todavia
@@ -71,7 +82,6 @@ Plug 'elixir-lang/vim-elixir'
 "
 "Plug 'godlygeek/tabular' " Ordena/alinea texto
 "Plug 'itchyny/lightline.vim' " Reemplazo de vim-airline
-"Plug 'Raimondi/delimitMate' "Cierra automaticamente comillas, parentesis, etc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#end()
@@ -239,6 +249,8 @@ augroup vimrc-remember-cursor-position
   autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 augroup END
 
+"Recarga automaticamente el buffer cuando un archivo ha tenido algun cambio
+set autoread
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Comportamiento y mapeos
