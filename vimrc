@@ -41,7 +41,8 @@ Plug 'tpope/vim-rails'
 Plug 'elixir-lang/vim-elixir'
 
 " Javascript
-Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 
 
 """" Herramientas
@@ -74,6 +75,9 @@ Plug 'Yggdroot/indentLine'
 
 " delimitMate Cierra automaticamente comillas, parentesis, etc
 Plug 'Raimondi/delimitMate'
+
+" emmet-vim expande extructuras de etiquetas html en un comando basico
+Plug 'mattn/emmet-vim'
 
 
 """Tentativos""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -325,10 +329,11 @@ augroup END
 
 """" Javascript
 "identacion
-augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript setl tabstop=4|setl shiftwidth=4|setl expandtab softtabstop=4
-augroup END
+" augroup vimrc-javascript
+"   autocmd!
+"   autocmd FileType javascript setl tabstop=2|setl shiftwidth=2|setl expandtab softtabstop=2
+"   autocmd FileType javascriptreact setl tabstop=2|setl shiftwidth=2|setl expandtab softtabstop=2
+" augroup END
 
 """" Ruby
 "Identacion
@@ -384,6 +389,9 @@ hi CocMenuSel ctermbg=237 guibg=#13354A
 
 "Ruta de NodeJS. Tecnicamente no es necesario, pero podria ser util
 "let g:coc_node_path = '/home/angel/.asdf/shims/node'
+
+" desactiva checkeo de syntaxys, para eso tengo a neomake
+let b:coc_diagnostic_disable=1
 
 
 """" vim-ruby

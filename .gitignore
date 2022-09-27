@@ -1,3 +1,5 @@
 bundle/
 /.netrwhist
 doc/
+autoload/
+plugged/
